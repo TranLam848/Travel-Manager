@@ -18,7 +18,7 @@ protected:
 public:
 	ManageMenu()
 	{
-		cout << "\n\n\n\n\n\n\n\t Enter Your Name to Continue as an Admin: ";
+		cout << "Enter Your Name to Continue as an Admin: ";
 		cin >> userName;
 		system("CLS");
 		menu();
@@ -38,69 +38,63 @@ public:
 	{
 		ofstream out("old-customers.txt", ios::app);
 
-		// Nhập Customer ID
 		while (true)
 		{
 			cout << "Enter Customer ID: ";
 			cin >> cusID;
 			if (cin.fail())
 			{
-				cin.clear();										 // Xóa cờ lỗi
-				cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Bỏ qua phần còn lại của dòng
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				cout << "Invalid input. Please enter a valid number for Customer ID: ";
 			}
 			else
 			{
-				cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Bỏ qua ký tự newline còn lại trong bộ đệm
-				break;												 // Thoát khỏi vòng lặp nếu nhập hợp lệ
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				break;
 			}
 		}
 
-		// Nhập Name
 		cout << "Enter Name: ";
 		getline(cin, name);
 
-		// Nhập Age
 		while (true)
 		{
 			cout << "Enter Age: ";
 			cin >> age;
 			if (cin.fail() || age < 0)
 			{
-				cin.clear();										 // Xóa cờ lỗi
-				cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Bỏ qua phần còn lại của dòng
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				cout << "Invalid input. Please enter a positive number for Age: ";
 			}
 			else
 			{
-				cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Bỏ qua ký tự newline còn lại trong bộ đệm
-				break;												 // Thoát khỏi vòng lặp nếu nhập hợp lệ
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				break;
 			}
 		}
 
-		// Nhập Gender
 		cout << "Enter Gender: ";
 		getline(cin, gender);
 
-		// Nhập Address
 		cout << "Enter Address: ";
 		getline(cin, address);
 
-		// Nhập Mobile Number
 		while (true)
 		{
 			cout << "Enter Mobile Number: ";
 			cin >> mobilenumber;
 			if (cin.fail() || mobilenumber <= 0)
 			{
-				cin.clear();										 // Xóa cờ lỗi
-				cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Bỏ qua phần còn lại của dòng
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				cout << "Invalid input. Please enter a valid mobile number: ";
 			}
 			else
 			{
-				cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Bỏ qua ký tự newline còn lại trong bộ đệm
-				break;												 // Thoát khỏi vòng lặp nếu nhập hợp lệ
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				break;
 			}
 		}
 
@@ -469,7 +463,7 @@ public:
 			outf << "--------------Receipt--------------" << endl;
 			outf << "___________________________________" << endl;
 
-			outf << "Custommer ID: " << Customers::cusID << endl
+			outf << "Customer ID: " << Customers::cusID << endl
 				 << endl;
 			outf << "Description\t\t Total" << endl;
 			outf << "Hotel cost:\t\t" << fixed << setprecision(2) << Booking::hotelCost << endl;
@@ -519,26 +513,30 @@ public:
 
 		while (getline(inf, line))
 		{
+
 			if (line == "___________________________________")
 			{
+				bool printBill = false;
+
 				while (getline(inf, line) && line != "___________________________________")
 				{
-					if (line.find("Custommer ID: " + to_string(id)) != string::npos)
+					if (line.find("Customer ID: " + to_string(id)) != string::npos)
 					{
 						found = true;
-						cout << "\n------------ Bill Found ------------\n";
+						printBill = true; 
+					}
+
+					if (printBill)
+					{
 						cout << line << endl;
-						while (getline(inf, line) && line != "___________________________________")
-						{
-							cout << line << endl;
-						}
-						cout << "------------------------------------\n";
-						break;
 					}
 				}
 
-				if (found)
-					break;
+				if (printBill)
+				{
+					cout << "------------------------------------\n";
+					printBill = false; 
+				}
 			}
 		}
 

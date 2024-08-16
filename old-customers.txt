@@ -1,0 +1,21 @@
+
+Customer ID: 1
+Name: Tran Hoang Lam
+Age: 22
+Gender: Mafe
+Address: Vinh Long
+Mobile Number: 523171111
+
+Customer ID: 2
+Name: Tran Thanh Dat
+Age: 22
+Gender: Mafe
+Address: Kien Giang
+Mobile Number: 999213145
+
+Customer ID: 3
+Name: Nguyen Kim Chinh
+Age: 21
+Gender: Femafe
+Address: Binh Duong
+Mobile Number: 523171222
